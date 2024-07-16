@@ -13,7 +13,7 @@ from linebot.v3.messaging import (
     ApiClient,
     MessagingApi,
     ReplyMessageRequest,
-    TextMessage
+    TextMessage,
     StickerMessage
 )
 from linebot.v3.webhooks import (
