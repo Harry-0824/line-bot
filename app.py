@@ -46,20 +46,23 @@ def callback():
     return 'OK'
 
 
-stickers = [
-    {'package_id': '1', 'sticker_id': '1'},
-    {'package_id': '1', 'sticker_id': '2'},
-    {'package_id': '1', 'sticker_id': '3'},
-    {'package_id': '2', 'sticker_id': '144'},
-    {'package_id': '2', 'sticker_id': '150'},
-    {'package_id': '6632', 'sticker_id': '11825374'}
-    # 可以根据需要添加更多的贴图ID对
-]
-
 @handler.add(MessageEvent, message=TextMessageContent)
 def handle_message(event):
     with ApiClient(configuration) as api_client:
         line_bot_api = MessagingApi(api_client)
+
+        # 随机选择一个贴图ID对
+        stickers = [
+	    {'package_id': '1', 'sticker_id': '1'},
+	    {'package_id': '1', 'sticker_id': '2'},
+	    {'package_id': '1', 'sticker_id': '3'},
+	    {'package_id': '2', 'sticker_id': '144'},
+	    {'package_id': '2', 'sticker_id': '150'},
+	    {'package_id': '6632', 'sticker_id': '11825374'}
+    	# 可以根据需要添加更多的贴图ID对
+		]
+		random_sticker = random.choice(stickers)
+		
         # Create a list of messages to reply with
         messages = [
             TextMessage(text=event.message.text),
