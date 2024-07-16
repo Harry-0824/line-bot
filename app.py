@@ -50,14 +50,14 @@ def handle_message(event):
     with ApiClient(configuration) as api_client:
         line_bot_api = MessagingApi(api_client)
         # Create a list of messages to reply with
-        messages = [
-            TextMessage(text=event.message.text),
-            StickerMessage(package_id='1', sticker_id='1')  # Example sticker, you can choose other package_id and sticker_id
-        ]
+        # messages = [
+        #     TextMessage(text=event.message.text),
+        #     StickerMessage(package_id='1', sticker_id='1')  # Example sticker, you can choose other package_id and sticker_id
+        # ]
         line_bot_api.reply_message_with_http_info(
             ReplyMessageRequest(
                 reply_token=event.reply_token,
-                messages=[TextMessage(text=messages)]
+                messages=[TextMessage(text=event.message.text),StickerMessage(package_id='1', sticker_id='1')]
             )
         )
 
