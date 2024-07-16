@@ -53,16 +53,16 @@ def handle_message(event):
 
         # 随机选择一个贴图ID对
         stickers = [
-	    {'package_id': '1', 'sticker_id': '1'},
-	    {'package_id': '1', 'sticker_id': '2'},
-	    {'package_id': '1', 'sticker_id': '3'},
-	    {'package_id': '2', 'sticker_id': '144'},
-	    {'package_id': '2', 'sticker_id': '150'},
-	    {'package_id': '6632', 'sticker_id': '11825374'}
-    	# 可以根据需要添加更多的贴图ID对
-		]
-		random_sticker = random.choice(stickers)
-		
+            {'package_id': '1', 'sticker_id': '1'},
+            {'package_id': '1', 'sticker_id': '2'},
+            {'package_id': '1', 'sticker_id': '3'},
+            {'package_id': '2', 'sticker_id': '144'},
+            {'package_id': '2', 'sticker_id': '150'},
+            {'package_id': '6632', 'sticker_id': '11825374'}
+            # 可以根据需要添加更多的贴图ID对
+        ]
+        random_sticker = random.choice(stickers)
+
         # Create a list of messages to reply with
         messages = [
             TextMessage(text=event.message.text),
@@ -72,9 +72,10 @@ def handle_message(event):
         line_bot_api.reply_message_with_http_info(
             ReplyMessageRequest(
                 reply_token=event.reply_token,
-                messages=[TextMessage(text=messages)]
+                messages=messages  # 此處修正了傳遞messages的方式
             )
         )
+
 
 if __name__ == "__main__":
     app.run()
