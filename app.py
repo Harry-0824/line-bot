@@ -46,19 +46,30 @@ def callback():
     return 'OK'
 
 
+stickers = [
+    {'package_id': '1', 'sticker_id': '1'},
+    {'package_id': '1', 'sticker_id': '2'},
+    {'package_id': '1', 'sticker_id': '3'},
+    {'package_id': '2', 'sticker_id': '144'},
+    {'package_id': '2', 'sticker_id': '150'},
+    {'package_id': '6632', 'sticker_id': '11825374'}
+    # 可以根据需要添加更多的贴图ID对
+]
+
 @handler.add(MessageEvent, message=TextMessageContent)
 def handle_message(event):
     with ApiClient(configuration) as api_client:
         line_bot_api = MessagingApi(api_client)
         # Create a list of messages to reply with
-        # messages = [
-        #     TextMessage(text=event.message.text),
-        #     StickerMessage(package_id='1', sticker_id='1')  # Example sticker, you can choose other package_id and sticker_id
-        # ]
+        messages = [
+            TextMessage(text=event.message.text),
+            StickerMessage(package_id=random_sticker['package_id'], sticker_id=random_sticker['sticker_id'])
+        ]
+
         line_bot_api.reply_message_with_http_info(
             ReplyMessageRequest(
                 reply_token=event.reply_token,
-                messages=[TextMessage(text=event.message.text),StickerMessage(package_id='1', sticker_id='1')]
+                messages=[TextMessage(text=messages)]
             )
         )
 
